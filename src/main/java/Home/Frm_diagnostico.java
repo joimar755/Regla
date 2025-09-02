@@ -50,7 +50,7 @@ public class Frm_diagnostico extends javax.swing.JFrame {
         txtrespuesta = new javax.swing.JTextField();
         combobox4 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Table_Relacion = new javax.swing.JTable();
         Btn_Mostrar = new javax.swing.JButton();
         Btn_Eliminar = new javax.swing.JButton();
 
@@ -116,7 +116,7 @@ public class Frm_diagnostico extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Table_Relacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -126,8 +126,22 @@ public class Frm_diagnostico extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(Table_Relacion);
+        if (Table_Relacion.getColumnModel().getColumnCount() > 0) {
+            Table_Relacion.getColumnModel().getColumn(0).setResizable(false);
+            Table_Relacion.getColumnModel().getColumn(1).setResizable(false);
+            Table_Relacion.getColumnModel().getColumn(2).setResizable(false);
+            Table_Relacion.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         Btn_Mostrar.setText("MOSTRAR");
 
@@ -331,9 +345,10 @@ public class Frm_diagnostico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Btn_Eliminar;
-    private javax.swing.JButton Btn_Mostrar;
+    public javax.swing.JButton Btn_Eliminar;
+    public javax.swing.JButton Btn_Mostrar;
     public javax.swing.JButton Btn_diagnostico;
+    public javax.swing.JTable Table_Relacion;
     public javax.swing.JButton btn_buscar;
     public javax.swing.JComboBox<String> combobox1;
     public javax.swing.JComboBox<String> combobox2;
@@ -352,7 +367,6 @@ public class Frm_diagnostico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     public javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     public javax.swing.JTextField txtBuscar;
     public javax.swing.JTextField txtemail;
     public javax.swing.JTextField txtnombre;
