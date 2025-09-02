@@ -242,8 +242,8 @@ public class Controlador_API_MDI implements ActionListener {
         }
     }
      public void iniciar() {
-        vista_diagnostico.setTitle("Bienvenido");
-        vista_diagnostico.setLocationRelativeTo(null);
+        principal.setTitle("Bienvenido");
+        principal.setLocationRelativeTo(null);
     }
 
 }
