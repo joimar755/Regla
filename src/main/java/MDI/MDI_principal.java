@@ -11,7 +11,7 @@ import Home.MDI_diagnostico;
  * @author joimar
  */
 public class MDI_principal extends javax.swing.JFrame {
-
+      
 
     /**
      * Creates new form MDI_principal

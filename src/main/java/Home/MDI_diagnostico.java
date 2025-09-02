@@ -15,10 +15,7 @@ public class MDI_diagnostico extends javax.swing.JInternalFrame {
      * Creates new form MDI_diagnostico
      */
     public MDI_diagnostico() {
-             super("Diagnóstico", true, true, true, true); 
-        // título, resizable, closable, maximizable, iconifiable
         initComponents();
-        this.setVisible(true);
     }
 
     /**

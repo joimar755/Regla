@@ -21,14 +21,14 @@ public class regla {
         MDI_diagnostico frmd = new MDI_diagnostico();
         Controlador_api ctl = new Controlador_api(fd);
         Controlador_API_MDI api = new Controlador_API_MDI(m, frmd);
-        api.iniciar();
-        m.setVisible(true);
-        frmd.setVisible(true);
+        //api.iniciar();
+        //m.setVisible(true);
+       // frmd.setVisible(true);
         //MDI.iniciar(); 
         //m.setVisible(true);
         
-        //ctl.iniciar();
-        //fd.setVisible(true);
+       ctl.iniciar();
+        fd.setVisible(true);
         
     }
 }
