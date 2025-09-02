@@ -34,6 +34,7 @@ public class Controlador_api implements ActionListener {
         this.vista_diagnostico = vista_diagnostico;
         this.vista_diagnostico.Btn_diagnostico.addActionListener(this);
         this.vista_diagnostico.Btn_Mostrar.addActionListener(this);
+        this.vista_diagnostico.btn_buscar.addActionListener(this);
         // Llenar combobox con "Sí" y "No"
         JComboBox<String>[] comboboxes = new JComboBox[]{
             vista_diagnostico.combobox1, vista_diagnostico.combobox2, vista_diagnostico.combobox3, vista_diagnostico.combobox4, vista_diagnostico.combobox5
@@ -97,6 +98,65 @@ public class Controlador_api implements ActionListener {
                 JOptionPane.showMessageDialog(vista_diagnostico,
                         "Error al obtener pacientes: " + ex.getMessage(),
                         "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        if (ae.getSource() == vista_diagnostico.btn_buscar) {
+            try {
+                // Tomar el ID desde el campo de texto
+                int id = Integer.parseInt(vista_diagnostico.txtBuscar.getText());
+
+                // URL de la API (ajusta el puerto si es distinto)
+                String url = "http://localhost:3000/pacientes/" + id;
+
+                // Configurar conexión
+                HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("Content-Type", "application/json");
+
+                // Leer respuesta
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = in.readLine()) != null) {
+                    response.append(line);
+                }
+                in.close();
+
+                // Parsear JSON
+                JSONObject json = new JSONObject(response.toString());
+
+                // Extraer datos principales
+                int pacienteId = json.getInt("id");
+                String nombre = json.getString("nombre");
+                String email = json.getString("email");
+
+                // Mostrar en los campos de texto
+                vista_diagnostico.txtnombre.setText(nombre);
+                vista_diagnostico.txtemail.setText(email);
+
+                // Procesar diagnosticos
+                JSONArray diagnosticos = json.optJSONArray("diagnosticos");
+                if (diagnosticos != null && diagnosticos.length() > 0) {
+                    StringBuilder diagTexto = new StringBuilder();
+                    DefaultTableModel model = (DefaultTableModel) vista_diagnostico.Table_Relacion.getModel();
+                    model.setRowCount(0); // limpiar la tabla
+                    for (int i = 0; i < diagnosticos.length(); i++) {
+                        JSONObject diag = diagnosticos.getJSONObject(i);
+                        String diagnostico = diag.optString("diagnostico", "No disponible");
+                        diagTexto.append("- ").append(diagnostico).append("\n");
+                        model.addRow(new Object[]{nombre, email, diagnostico});
+
+                    }
+                    // Mostrar en un JTextArea (asegúrate de tenerlo en tu vista)
+                    //vista_diagnostico.txtrespuesta.setText(diagTexto.toString());
+                } else {
+                    vista_diagnostico.txtrespuesta.setText("Sin diagnósticos");
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error al buscar paciente");
             }
         }
 
