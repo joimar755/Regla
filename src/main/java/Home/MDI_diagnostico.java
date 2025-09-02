@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package Home;
 
@@ -8,14 +8,17 @@ package Home;
  *
  * @author joimar
  */
-public class Frm_diagnostico extends javax.swing.JFrame {
+public class MDI_diagnostico extends javax.swing.JInternalFrame {
+
 
     /**
-     * Creates new form Frm_diagnostico
+     * Creates new form MDI_diagnostico
      */
-    public Frm_diagnostico() {
+    public MDI_diagnostico() {
+             super("Diagnóstico", true, true, true, true); 
+        // título, resizable, closable, maximizable, iconifiable
         initComponents();
-
+        this.setVisible(true);
     }
 
     /**
@@ -53,8 +56,6 @@ public class Frm_diagnostico extends javax.swing.JFrame {
         Table_Relacion = new javax.swing.JTable();
         Btn_Mostrar = new javax.swing.JButton();
         Btn_Eliminar = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(51, 204, 255));
 
@@ -136,12 +137,6 @@ public class Frm_diagnostico extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(Table_Relacion);
-        if (Table_Relacion.getColumnModel().getColumnCount() > 0) {
-            Table_Relacion.getColumnModel().getColumn(0).setResizable(false);
-            Table_Relacion.getColumnModel().getColumn(1).setResizable(false);
-            Table_Relacion.getColumnModel().getColumn(2).setResizable(false);
-            Table_Relacion.getColumnModel().getColumn(3).setResizable(false);
-        }
 
         Btn_Mostrar.setText("MOSTRAR");
 
@@ -199,11 +194,10 @@ public class Frm_diagnostico extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Btn_diagnostico))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(Btn_Eliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Btn_Mostrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))))
+                    .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(Btn_Eliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Btn_Mostrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)))
                 .addGap(123, 123, 123)
                 .addComponent(jLabel10)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -267,7 +261,7 @@ public class Frm_diagnostico extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 779, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -281,7 +275,6 @@ public class Frm_diagnostico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
@@ -290,9 +283,9 @@ public class Frm_diagnostico extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnombreActionPerformed
 
-    private void txtrespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtrespuestaActionPerformed
+    private void txtemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtrespuestaActionPerformed
+    }//GEN-LAST:event_txtemailActionPerformed
 
     private void combobox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox1ActionPerformed
         // TODO add your handling code here:
@@ -302,46 +295,14 @@ public class Frm_diagnostico extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_combobox2ActionPerformed
 
-    private void txtemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailActionPerformed
+    private void txtrespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtrespuestaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtemailActionPerformed
+    }//GEN-LAST:event_txtrespuestaActionPerformed
 
     private void Btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_EliminarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frm_diagnostico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frm_diagnostico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frm_diagnostico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frm_diagnostico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new Frm_diagnostico().setVisible(true);
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Btn_Eliminar;
@@ -371,4 +332,8 @@ public class Frm_diagnostico extends javax.swing.JFrame {
     public javax.swing.JTextField txtnombre;
     public javax.swing.JTextField txtrespuesta;
     // End of variables declaration//GEN-END:variables
+
+    public void setLocationRelativeTo(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -1,11 +1,14 @@
 /home/joimar/NetBeansProjects/Regla/src/main/java/Home/Registro.java
-/home/joimar/NetBeansProjects/Regla/src/main/java/principal/frmregistro.java
 /home/joimar/NetBeansProjects/Regla/src/main/java/controlador/Controlador_api.java
 /home/joimar/NetBeansProjects/Regla/src/main/java/modelo/Diagnostico.java
+/home/joimar/NetBeansProjects/Regla/src/main/java/Home/DiagnosticoApp.java
+/home/joimar/NetBeansProjects/Regla/src/main/java/principal/frmlogin.java
+/home/joimar/NetBeansProjects/Regla/src/main/java/controlador/Controlador_API_MDI.java
+/home/joimar/NetBeansProjects/Regla/src/main/java/principal/frmregistro.java
 /home/joimar/NetBeansProjects/Regla/src/main/java/modelo/Paciente.java
 /home/joimar/NetBeansProjects/Regla/src/main/java/Regla/regla.java
 /home/joimar/NetBeansProjects/Regla/src/main/java/Home/frmlogin.java
-/home/joimar/NetBeansProjects/Regla/src/main/java/Home/DiagnosticoApp.java
+/home/joimar/NetBeansProjects/Regla/src/main/java/Home/MDI_diagnostico.java
 /home/joimar/NetBeansProjects/Regla/src/main/java/com/mycompany/regla/Regla.java
-/home/joimar/NetBeansProjects/Regla/src/main/java/principal/frmlogin.java
+/home/joimar/NetBeansProjects/Regla/src/main/java/MDI/MDI_principal.java
 /home/joimar/NetBeansProjects/Regla/src/main/java/Home/Frm_diagnostico.java
