@@ -18,9 +18,9 @@ public class MDI_principal extends javax.swing.JFrame {
      */
     public MDI_principal() {
         initComponents();
-        desktopPane = new javax.swing.JDesktopPane();
-        this.setContentPane(desktopPane);
-        this.setExtendedState(MAXIMIZED_BOTH);
+        //desktopPane = new javax.swing.JDesktopPane();
+        //this.setContentPane(desktopPane);
+        //this.setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -36,7 +36,7 @@ public class MDI_principal extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         Menu_diagnostico = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
+        Btn_table = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
@@ -62,9 +62,9 @@ public class MDI_principal extends javax.swing.JFrame {
         });
         fileMenu.add(Menu_diagnostico);
 
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Save");
-        fileMenu.add(saveMenuItem);
+        Btn_table.setMnemonic('s');
+        Btn_table.setText("Tabla");
+        fileMenu.add(Btn_table);
 
         saveAsMenuItem.setMnemonic('a');
         saveAsMenuItem.setText("Save As ...");
@@ -180,6 +180,7 @@ public class MDI_principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JMenuItem Btn_table;
     public javax.swing.JMenuItem Menu_diagnostico;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
@@ -194,7 +195,6 @@ public class MDI_principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
 
 }

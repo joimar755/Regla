@@ -4,6 +4,7 @@
  */
 package controlador;
 
+import Home.Formulario;
 import Home.MDI_diagnostico;
 import MDI.MDI_principal;
 import java.awt.event.ActionEvent;
@@ -29,15 +30,20 @@ import org.json.JSONObject;
 public class Controlador_API_MDI implements ActionListener {
 
     private MDI_diagnostico vista_diagnostico;
+    private Formulario form;
     private MDI_principal principal;
 
-    public Controlador_API_MDI(MDI_principal principal, MDI_diagnostico vista_diagnostico) {
+    public Controlador_API_MDI(MDI_principal principal, MDI_diagnostico vista_diagnostico, Formulario form) {
         this.vista_diagnostico = vista_diagnostico;
         this.principal = principal;
+        this.form = form;
+
         this.vista_diagnostico.Btn_diagnostico.addActionListener(this);
         this.vista_diagnostico.Btn_Mostrar.addActionListener(this);
         this.vista_diagnostico.btn_buscar.addActionListener(this);
         this.principal.Menu_diagnostico.addActionListener(this);
+        this.principal.Btn_table.addActionListener(this);
+
         // Llenar combobox con "Sí" y "No"
         JComboBox<String>[] comboboxes = new JComboBox[]{
             vista_diagnostico.combobox1, vista_diagnostico.combobox2, vista_diagnostico.combobox3, vista_diagnostico.combobox4, vista_diagnostico.combobox5
@@ -52,6 +58,7 @@ public class Controlador_API_MDI implements ActionListener {
         String[] Nombres_Columnas = {"nombre", "email", "diagnostico"};
         modelo.setColumnIdentifiers(Nombres_Columnas);
         vista_diagnostico.Table_Relacion.setModel(modelo);
+        form.table.setModel(modelo);
 
     }
 
@@ -100,74 +107,29 @@ public class Controlador_API_MDI implements ActionListener {
         }
 
         if (ae.getSource() == vista_diagnostico.btn_buscar) {
-            try {
-                // Tomar el ID desde el campo de texto
-                int id = Integer.parseInt(vista_diagnostico.txtBuscar.getText());
+            ValidarCamposLLenos();
 
-                // URL de la API (ajusta el puerto si es distinto)
-                String url = "http://localhost:3000/pacientes/" + id;
-
-                // Configurar conexión
-                HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
-                con.setRequestMethod("GET");
-                con.setRequestProperty("Content-Type", "application/json");
-
-                // Leer respuesta
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = in.readLine()) != null) {
-                    response.append(line);
-                }
-                in.close();
-
-                // Parsear JSON
-                JSONObject json = new JSONObject(response.toString());
-
-                // Extraer datos principales
-                int pacienteId = json.getInt("id");
-                String nombre = json.getString("nombre");
-                String email = json.getString("email");
-
-                // Mostrar en los campos de texto
-                vista_diagnostico.txtnombre.setText(nombre);
-                vista_diagnostico.txtemail.setText(email);
-
-                // Procesar diagnosticos
-                JSONArray diagnosticos = json.optJSONArray("diagnosticos");
-                if (diagnosticos != null && diagnosticos.length() > 0) {
-                    StringBuilder diagTexto = new StringBuilder();
-                    DefaultTableModel model = (DefaultTableModel) vista_diagnostico.Table_Relacion.getModel();
-                    model.setRowCount(0); // limpiar la tabla
-                    for (int i = 0; i < diagnosticos.length(); i++) {
-                        JSONObject diag = diagnosticos.getJSONObject(i);
-                        String diagnostico = diag.optString("diagnostico", "No disponible");
-                        diagTexto.append("- ").append(diagnostico).append("\n");
-                        model.addRow(new Object[]{nombre, email, diagnostico});
-
-                    }
-                    // Mostrar en un JTextArea (asegúrate de tenerlo en tu vista)
-                    //vista_diagnostico.txtrespuesta.setText(diagTexto.toString());
-                } else {
-                    vista_diagnostico.txtrespuesta.setText("Sin diagnósticos");
-                }
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error al buscar paciente");
-            }
         }
         if (ae.getSource() == principal.Menu_diagnostico) {
-            vista_diagnostico = new MDI_diagnostico();
-            principal.desktopPane.add(vista_diagnostico);
-            vista_diagnostico.setVisible(true);
-          
+            MDI_diagnostico nuevoDiag = new MDI_diagnostico();
+            principal.desktopPane.add(nuevoDiag);
+
+            // crear un nuevo controlador SOLO para este formulario
+            
+            Controlador_API_MDI nuevoCtl = new Controlador_API_MDI(principal, nuevoDiag, form);
+            nuevoCtl.iniciar();
+
+            nuevoDiag.setVisible(true);
+
+        }
+        if (ae.getSource() == principal.Btn_table) {
+            form = new Formulario();
+            principal.desktopPane.add(form);
+            form.setVisible(true);
 
         }
 
     }
-
-   
 
     private boolean toBoolean(JComboBox<String> comboBox) {
         String value = (String) comboBox.getSelectedItem();
@@ -200,6 +162,65 @@ public class Controlador_API_MDI implements ActionListener {
             response.append(line.trim());
         }
         return response.toString();
+    }
+
+    private void Buscar() {
+        try {
+            // Tomar el ID desde el campo de texto
+            int id = Integer.parseInt(vista_diagnostico.txtBuscar.getText());
+
+            // URL de la API (ajusta el puerto si es distinto)
+            String url = "http://localhost:3000/pacientes/" + id;
+
+            // Configurar conexión
+            HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type", "application/json");
+
+            // Leer respuesta
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = in.readLine()) != null) {
+                response.append(line);
+            }
+            in.close();
+
+            // Parsear JSON
+            JSONObject json = new JSONObject(response.toString());
+
+            // Extraer datos principales
+            int pacienteId = json.getInt("id");
+            String nombre = json.getString("nombre");
+            String email = json.getString("email");
+
+            // Mostrar en los campos de texto
+            vista_diagnostico.txtnombre.setText(nombre);
+            vista_diagnostico.txtemail.setText(email);
+
+            // Procesar diagnosticos
+            JSONArray diagnosticos = json.optJSONArray("diagnosticos");
+            if (diagnosticos != null && diagnosticos.length() > 0) {
+                StringBuilder diagTexto = new StringBuilder();
+                DefaultTableModel model = (DefaultTableModel) vista_diagnostico.Table_Relacion.getModel();
+                model.setRowCount(0); // limpiar la tabla
+                for (int i = 0; i < diagnosticos.length(); i++) {
+                    JSONObject diag = diagnosticos.getJSONObject(i);
+                    String diagnostico = diag.optString("diagnostico", "No disponible");
+                    diagTexto.append("- ").append(diagnostico).append("\n");
+                    model.addRow(new Object[]{nombre, email, diagnostico});
+
+                }
+                // Mostrar en un JTextArea (asegúrate de tenerlo en tu vista)
+                //vista_diagnostico.txtrespuesta.setText(diagTexto.toString());
+            } else {
+                vista_diagnostico.txtrespuesta.setText("Sin diagnósticos");
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al buscar paciente");
+        }
     }
 
     private void mostrarDatos() {
@@ -241,7 +262,30 @@ public class Controlador_API_MDI implements ActionListener {
             // JOptionPane.showMessageDialog(this "Error al obtener datos: " + e.getMessage());
         }
     }
-     public void iniciar() {
+
+    public static boolean esNumero(String texto) {
+        try {
+            Long.parseLong(texto);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+
+    public void ValidarCamposLLenos() {
+        //String Cedula = vista_diagnostico.btn_buscar.getText();
+
+        if (vista_diagnostico.txtnombre.getText().length() == 0 || vista_diagnostico.txtemail.getText().length() == 0
+                || vista_diagnostico.txtBuscar.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null, "llene los campos");
+        } else if (!esNumero(vista_diagnostico.txtBuscar.getText())) {
+            JOptionPane.showMessageDialog(null, "El campo id debe contener solo números.");
+        } else {
+            Buscar();
+        }
+    }
+
+    public void iniciar() {
         principal.setTitle("Bienvenido");
         principal.setLocationRelativeTo(null);
     }
