@@ -10,60 +10,52 @@ package modelo;
  */
 public class Diagnostico extends Paciente {
 
-    private boolean dolorAbdominal;
-    private boolean nauseas;
-    private boolean vomito;
-    private boolean diarrea;
+    private boolean dolor_lumbar;
+    private boolean dolor_miccion;
+    private boolean orina_con_sangre;
     private boolean fiebre;
+    private boolean orina_frecuente;
 
     public Diagnostico(String nombre, String email) {
         super(nombre, email);
-        this.dolorAbdominal = dolorAbdominal;
-        this.nauseas = nauseas;
-        this.vomito = vomito;
-        this.diarrea = diarrea;
+        this.dolor_lumbar = dolor_lumbar;
+        this.dolor_miccion = dolor_miccion;
+        this.orina_con_sangre = orina_con_sangre;
         this.fiebre = fiebre;
+        this.orina_frecuente = orina_frecuente;
     }
 
-    public Diagnostico(boolean dolorAbdominal, boolean nauseas, boolean vomito, boolean diarrea, boolean fiebre, String nombre, String email) {
+    public Diagnostico(boolean dolor_lumbar, boolean dolor_miccion, boolean orina_con_sangre, boolean fiebre, boolean orina_frecuente, String nombre, String email) {
         super(nombre, email);
-        this.dolorAbdominal = dolorAbdominal;
-        this.nauseas = nauseas;
-        this.vomito = vomito;
-        this.diarrea = diarrea;
+        this.dolor_lumbar = dolor_lumbar;
+        this.dolor_miccion = dolor_miccion;
+        this.orina_con_sangre = orina_con_sangre;
         this.fiebre = fiebre;
+        this.orina_frecuente = orina_frecuente;
     }
 
-    public boolean isDolorAbdominal() {
-        return dolorAbdominal;
+    public boolean isDolor_lumbar() {
+        return dolor_lumbar;
     }
 
-    public void setDolorAbdominal(boolean dolorAbdominal) {
-        this.dolorAbdominal = dolorAbdominal;
+    public void setDolor_lumbar(boolean dolor_lumbar) {
+        this.dolor_lumbar = dolor_lumbar;
     }
 
-    public boolean isNauseas() {
-        return nauseas;
+    public boolean isDolor_miccion() {
+        return dolor_miccion;
     }
 
-    public void setNauseas(boolean nauseas) {
-        this.nauseas = nauseas;
+    public void setDolor_miccion(boolean dolor_miccion) {
+        this.dolor_miccion = dolor_miccion;
     }
 
-    public boolean isVomito() {
-        return vomito;
+    public boolean isOrina_con_sangre() {
+        return orina_con_sangre;
     }
 
-    public void setVomito(boolean vomito) {
-        this.vomito = vomito;
-    }
-
-    public boolean isDiarrea() {
-        return diarrea;
-    }
-
-    public void setDiarrea(boolean diarrea) {
-        this.diarrea = diarrea;
+    public void setOrina_con_sangre(boolean orina_con_sangre) {
+        this.orina_con_sangre = orina_con_sangre;
     }
 
     public boolean isFiebre() {
@@ -74,16 +66,26 @@ public class Diagnostico extends Paciente {
         this.fiebre = fiebre;
     }
 
+    public boolean isOrina_frecuente() {
+        return orina_frecuente;
+    }
+
+    public void setOrina_frecuente(boolean orina_frecuente) {
+        this.orina_frecuente = orina_frecuente;
+    }
+
+    
+
     public String toJson() {
         return "{"
                 + "\"nombre\": \"" + getNombre() + "\","
                 + "\"email\": \"" + getEmail() + "\","
                 + "\"hechos\": {"
-                + "\"dolor_abdominal\": " + dolorAbdominal + ","
-                + "\"nauseas\": " + nauseas + ","
-                + "\"vomito\": " + vomito + ","
-                + "\"diarrea\": " + diarrea + ","
-                + "\"fiebre\": " + fiebre
+                + "\"dolor_lumbar\": " + dolor_lumbar + ","
+                + "\"dolor_miccion\": " + dolor_miccion + ","
+                + "\"orina_con_sangre\": " + orina_con_sangre + ","
+                + "\"fiebre\": " + fiebre + ","
+                + "\"orina_frecuente\": " + orina_frecuente
                 + "}"
                 + "}";
     }

@@ -170,7 +170,7 @@ public class Controlador_API_MDI implements ActionListener {
             int id = Integer.parseInt(vista_diagnostico.txtBuscar.getText());
 
             // URL de la API (ajusta el puerto si es distinto)
-            String url = "http://localhost:3000/pacientes/" + id;
+            String url = "http://localhost:3000pacientes/" + id;
 
             // Configurar conexión
             HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
